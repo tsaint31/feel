@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+<form>
+          <div class="form-row">
+            <div>
+              <input type="text" class="form-control" placeholder="Login" id="loginID">
+            </div>
+            <button type="button" class="btn btn-primary" id="go">Please enter your personal ID</button>
+          </div>
+        </form>
+
+        <script>
+            const myInput = document.getElementById("loginID");
+             const myButton = document.getElementById("go");
+             myButton.addEventListener("click", () => {
+               window.location.href = myInput.value;
+             });
+            </script>
+
+{% endblock %}

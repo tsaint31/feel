@@ -3,8 +3,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const MAPWEATHER_ID=process.env.MAPWEATHER_ID;
-
-
+const PG = require("pg");
 const nunjucks = require("nunjucks");
 
 nunjucks.configure("views", {
@@ -19,13 +18,58 @@ app.listen(port, function () {
     console.log("Server listening on port:" + port);
   });
 
-
 app.use(express.static('./images/'));
 
 app.get("/", function(request, result) {
-      result.render("cat", {feeling: 0});
+      result.render("login");
 });
 
 app.get("/:id", function(request, result) {
-      result.render("cat", {feeling: request.params.id});
+      result.render("catfirst", {name: request.params.id});
 });
+
+app.get("/feeling/:name/:id", function(request, result) {
+      insertID(request.params.id,request.params.name);
+      retrieveID(request.params.id,request.params.name,result);
+      // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
+});
+
+function insertID(id,name) {
+  const today = new Date();
+  const client = new PG.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+  client.connect();
+  client.query(
+    "INSERT INTO feeling (date,feeling,name) VALUES ($1::date,$2::integer,$3::text);",
+    [today, id,name],
+    function(error, result1) {
+      if (error) {
+        console.warn(error);
+      }
+      client.end();
+    }
+  );
+}
+
+function retrieveID(id,name,result) {
+  const client = new PG.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+  client.connect();
+  client.query(
+    "SELECT * FROM feeling where name = $1::text",
+    [name],
+    function(error, result1) {
+      if (error) {
+        console.warn(error);
+      }
+      // return result1.rows;
+      console.log(result1.rows);
+      result.render("cat", {feeling:id, name:name, stats:result1.rows})
+      client.end();
+    }
+  );
+}
