@@ -6,15 +6,50 @@
 <div class="container-fluid bg-light">
 <div class="row">
 
-  <div class="col-lg-6 col-6 mr-1">
+  <div class="col-lg-6 col-6">
       <h1 class="text-center bg-light"> YOUR FEELING TODAY: </h1>
       <img class="card-img-top" src=/{{feeling}}.jpg alt="Card image cap">
+      {% if feeling === 5 %}
+      <h1>INVINCIBLE</h1>
+      {% elif feeling === 4 %}
+      <h1>READY </h1>
+      {% elif feeling === 3 %}
+      <h1>NEUTRAL</h1>
+      {% elif feeling === 2 %}
+      <h1>SMALL HEALTH</h1>
+      {% else %}
+      <h1>UNDERGROUND</h1>
+      {% endif %}
   </div>
+
+  <div class="col-lg-6 col-6 ">
+      <h1 class="text-center bg-light"> Feel free to contact for new challenge : </h1>
+      <h4 class="text-center bg-light"> thierry.saintmaxent@decathlon.com : </h4>
+      <h4 class="text-center bg-light"> Decathlon Villeneuve d'ascq </h4>
+      <h4 class="text-center bg-light"> Record 10km : 35'29" </h4>
+      <h4 class="text-center bg-light"> Record marathon : 2h53'57" </h4>
+      <h4 class="text-center bg-light"> UTMB Finisher </h4>
+
+  </div>
+
+</div>
+
+<div class="row">
 
   <div class="col-lg-6 col-6 mr-1">
   <h1 class="text-center bg-light"> YOUR PAST FEELING : </h1>
 {% for element in stats %}
-<p>{{element.date}} {{element.name}} {{element.feeling}}</p>
+{% if element.feeling === 5 %}
+<p>{{element.date}} {{element.name}} INVINCIBLE</p>
+{% elif element.feeling === 4 %}
+<p>{{element.date}} {{element.name}} READY </p>
+{% elif element.feeling === 3 %}
+<p>{{element.date}} {{element.name}} NEUTRAL</p>
+{% elif element.feeling === 2 %}
+<p>{{element.date}} {{element.name}} SMALL HEALTH</p>
+{% else %}
+<p>{{element.date}} {{element.name}} UNDERGROUND</p>
+{% endif %}
 {% endfor %}
 </div>
 </div>

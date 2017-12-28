@@ -36,13 +36,14 @@ app.get("/feeling/:name/:id", function(request, result) {
 
 function insertID(id,name) {
   const today = new Date();
+  console.log(today);
   const client = new PG.Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
   client.connect();
   client.query(
-    "INSERT INTO feeling (date,feeling,name) VALUES ($1::date,$2::integer,$3::text);",
+    "INSERT INTO feeling (date,feeling,name) VALUES ($1::timestamp,$2::integer,$3::text);",
     [today, id,name],
     function(error, result1) {
       if (error) {
@@ -60,14 +61,13 @@ function retrieveID(id,name,result) {
 });
   client.connect();
   client.query(
-    "SELECT * FROM feeling where name = $1::text",
+    "SELECT * FROM feeling where name = $1::text ORDER BY date DESC",
     [name],
     function(error, result1) {
       if (error) {
         console.warn(error);
       }
       // return result1.rows;
-      console.log(result1.rows);
       result.render("cat", {feeling:id, name:name, stats:result1.rows})
       client.end();
     }
