@@ -36,7 +36,6 @@ app.get("/feeling/:name/:id", function(request, result) {
 
 function insertID(id,name) {
   const today = new Date();
-  console.log(today);
   const client = new PG.Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -61,15 +60,23 @@ function retrieveID(id,name,result) {
 });
   client.connect();
   client.query(
-    "SELECT * FROM feeling where name = $1::text ORDER BY date DESC",
+    "SELECT * FROM feeling where name = $1::text ORDER BY date DESC limit 10",
     [name],
     function(error, result1) {
       if (error) {
         console.warn(error);
       }
-      // return result1.rows;
-      result.render("cat", {feeling:id, name:name, stats:result1.rows})
+      client.query(
+      "SELECT COUNT (feeling),feeling from feeling where name=$1::text and date_part('year', date) = date_part('year', CURRENT_DATE) GROUP BY feeling ORDER BY feeling DESC",
+      [name],
+      function(error, result2) {
+        if (error) {
+          console.warn(error);
+        }
+      result.render("cat", {feeling:id, name:name, stats:result1.rows, yearstats:result2.rows})
       client.end();
     }
   );
+}
+);
 }

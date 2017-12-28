@@ -8,36 +8,38 @@
 
   <div class="col-lg-6 col-6">
       <h1 class="text-center bg-light"> YOUR FEELING TODAY: </h1>
-      <img class="card-img-top" src=/{{feeling}}.jpg alt="Card image cap">
-      {% if feeling === 5 %}
+      {% if feeling == 5 %}
       <h1>INVINCIBLE</h1>
-      {% elif feeling === 4 %}
-      <h1>READY </h1>
-      {% elif feeling === 3 %}
+      {% elif feeling == 4 %}
+      <h1>READY</h1>
+      {% elif feeling == 3 %}
       <h1>NEUTRAL</h1>
-      {% elif feeling === 2 %}
+      {% elif feeling == 2 %}
       <h1>SMALL HEALTH</h1>
       {% else %}
       <h1>UNDERGROUND</h1>
       {% endif %}
+      <img class="card-img-top" src=/{{feeling}}.jpg alt="Card image cap">
+
   </div>
 
   <div class="col-lg-6 col-6 ">
       <h1 class="text-center bg-light"> Feel free to contact for new challenge : </h1>
-      <h4 class="text-center bg-light"> thierry.saintmaxent@decathlon.com : </h4>
+      <a href="mailto:thierry.saintmaxent@decathlon.com"><h4 class="text-center bg-light">thierry.saintmaxent@decathlon.com</h4></a>
       <h4 class="text-center bg-light"> Decathlon Villeneuve d'ascq </h4>
       <h4 class="text-center bg-light"> Record 10km : 35'29" </h4>
       <h4 class="text-center bg-light"> Record marathon : 2h53'57" </h4>
       <h4 class="text-center bg-light"> UTMB Finisher </h4>
-
+      <a href=/{{name}}><p class="text-center bg-light"> enter again your feeling </p></a>
+      <a href=/><p class="text-center bg-light"> new user </p></a>
   </div>
 
 </div>
 
 <div class="row">
 
-  <div class="col-lg-6 col-6 mr-1">
-  <h1 class="text-center bg-light"> YOUR PAST FEELING : </h1>
+  <div class="col-lg-6 col-6">
+  <h1 class="text-center bg-light"> YOUR 10 PAST FEELING : </h1>
 {% for element in stats %}
 {% if element.feeling === 5 %}
 <p>{{element.date}} {{element.name}} INVINCIBLE</p>
@@ -52,6 +54,26 @@
 {% endif %}
 {% endfor %}
 </div>
+
+<div class="col-lg-6 col-6">
+<h1 class="text-center bg-light"> SINCE THE BEGGINING OF THE YEAR : </h1>
+{% for element in yearstats %}
+{% if element.feeling === 5 %}
+<p>INVINCIBLE : {{element.count}}</p>
+{% elif element.feeling === 4 %}
+<p>READY : {{element.count}}</p>
+{% elif element.feeling === 3 %}
+<p>NEUTRAL : {{element.count}}</p>
+{% elif element.feeling === 2 %}
+<p>SMALL HEALTH : {{element.count}}</p>
+{% elif element.feeling === 1 %}
+<p>UNDERGROUND : {{element.count}} </p>
+{% endif %}
+{% endfor %}
+</div>
+
+
+
 </div>
 </div>
 
