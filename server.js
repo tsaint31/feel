@@ -49,7 +49,7 @@ app.get("/feeling/:name/:id", function(request, result) {
       // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
 });
 
-app.get("/feeling/:name/stats", function(request, result) {
+app.get("/stats/:name", function(request, result) {
       retrieveID(0,request.params.name,result);
       // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
 });
