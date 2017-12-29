@@ -16,7 +16,7 @@
       <h1>NEUTRAL</h1>
       {% elif feeling == 2 %}
       <h1>SMALL HEALTH</h1>
-      {% else %}
+      {% elif feeling == 1 %}
       <h1>UNDERGROUND</h1>
       {% endif %}
       <img class="card-img-top" src=/{{feeling}}.jpg alt="Card image cap">
@@ -27,11 +27,14 @@
       <h1 class="text-center bg-light"> Feel free to contact for new challenge : </h1>
       <a href="mailto:thierry.saintmaxent@decathlon.com"><h4 class="text-center bg-light">thierry.saintmaxent@decathlon.com</h4></a>
       <h4 class="text-center bg-light"> Decathlon Villeneuve d'ascq </h4>
-      <h4 class="text-center bg-light"> Record 10km : 35'29" </h4>
+      <h4 class="text-center bg-light"> Record 10km : 35'28" </h4>
+      <h4 class="text-center bg-light"> Record semi marathon : 1h18'46" </h4>
       <h4 class="text-center bg-light"> Record marathon : 2h53'57" </h4>
       <h4 class="text-center bg-light"> UTMB Finisher </h4>
-      <a href=/{{name}}><p class="text-center bg-light"> enter again your feeling </p></a>
-      <a href=/><p class="text-center bg-light"> new user </p></a>
+      <h1 class="text-center bg-light"> or you can contact one of our store who can help you !!!!! </h1>
+      <a href=/{{name}}><p class="text-center bg-light"> ENTER YOUR FEELING </p></a>
+      <a href=/><p class="text-center bg-light"> NEW USER </p></a>
+
   </div>
 
 </div>
@@ -75,6 +78,9 @@
 
 
 </div>
+</div>
+
+<div class="container-fluid text-center text-white bg-primary jumbotron">
 </div>
 
 {% endblock %}

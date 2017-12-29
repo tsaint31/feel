@@ -2,14 +2,29 @@
 
 {% block content %}
 
-<form>
-          <div class="form-row">
+        <form>
+        <div class="form-row mt-5">
             <div>
-              <input type="text" class="form-control" placeholder="Login" id="loginID">
+              <input type="text-center" class="form-control" placeholder="Login" id="loginID">
             </div>
             <button type="button" class="btn btn-primary" id="go">Please enter your personal ID</button>
-          </div>
+        </div>
+
         </form>
+
+        <div class="row mt-5">
+          <div class="col align-self-center">
+              <p class="text-center"> What is the most important in sport? The state of your mind. A good feeling is half of the job to start a good journey.
+                 Todayfeeling application is here to help you to express what is your current state of mind. Each day, each moment is saved and you can follow your evolution.
+                 This is half part of the job, then each member of our team is ready to help you to find new challenge for your evolution. Enjoy!!!!</p>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col align-self-center">
+                <p class="text-center">Current number of users :  {{users[0].count}}</p>
+            </div>
+        </div>
 
         <script>
             const myInput = document.getElementById("loginID");
@@ -17,6 +32,6 @@
              myButton.addEventListener("click", () => {
                window.location.href = myInput.value;
              });
-            </script>
+        </script>
 
 {% endblock %}

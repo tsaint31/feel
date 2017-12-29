@@ -21,7 +21,22 @@ app.listen(port, function () {
 app.use(express.static('./images/'));
 
 app.get("/", function(request, result) {
-      result.render("login");
+  const client = new PG.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+  client.connect();
+  client.query(
+    "SELECT COUNT (DISTINCT name) from feeling",
+    [],
+    function(error, result1) {
+      if (error) {
+        console.warn(error);
+      }
+      console.log(result1.rows);
+      result.render("login", {users:result1.rows});
+      client.end();
+});
 });
 
 app.get("/:id", function(request, result) {
@@ -31,6 +46,11 @@ app.get("/:id", function(request, result) {
 app.get("/feeling/:name/:id", function(request, result) {
       insertID(request.params.id,request.params.name);
       retrieveID(request.params.id,request.params.name,result);
+      // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
+});
+
+app.get("/feeling/:name/stats", function(request, result) {
+      retrieveID(0,request.params.name,result);
       // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
 });
 
