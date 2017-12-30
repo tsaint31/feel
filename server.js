@@ -21,6 +21,23 @@ app.listen(port, function () {
 app.use(express.static('./images/'));
 
 app.get("/", function(request, result) {
+  login(result);
+});
+
+app.get("/:id", function(request, result) {
+      result.render("catfirst", {name: request.params.id});
+});
+
+app.get("/feeling/:name/:id", function(request, result) {
+      insertID(request.params.id,request.params.name);
+      retrieveID(request.params.id,request.params.name,result);
+});
+
+app.get("/stats/:name", function(request, result) {
+      retrieveID(0,request.params.name,result);
+});
+
+function login(result) {
   const client = new PG.Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -33,26 +50,10 @@ app.get("/", function(request, result) {
       if (error) {
         console.warn(error);
       }
-      console.log(result1.rows);
       result.render("login", {users:result1.rows});
       client.end();
 });
-});
-
-app.get("/:id", function(request, result) {
-      result.render("catfirst", {name: request.params.id});
-});
-
-app.get("/feeling/:name/:id", function(request, result) {
-      insertID(request.params.id,request.params.name);
-      retrieveID(request.params.id,request.params.name,result);
-      // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
-});
-
-app.get("/stats/:name", function(request, result) {
-      retrieveID(0,request.params.name,result);
-      // result.render("cat", {feeling: request.params.id, name:request.params.name, stats:stat});
-});
+}
 
 function insertID(id,name) {
   const today = new Date();

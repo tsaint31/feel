@@ -5,7 +5,6 @@
     <h1 class="text-center bg-light"> Hello {{name}} </h1>
 <div class="container-fluid bg-light">
 <div class="row">
-
   <div class="col-lg-6 col-6">
       <h1 class="text-center bg-light"> YOUR FEELING TODAY: </h1>
       {% if feeling == 5 %}
@@ -20,27 +19,21 @@
       <h1>UNDERGROUND</h1>
       {% endif %}
       <img class="card-img-top" src=/{{feeling}}.jpg alt="Card image cap">
-
   </div>
 
   <div class="col-lg-6 col-6 ">
-      <h1 class="text-center bg-light"> Feel free to contact for new challenge : </h1>
-      <a href="mailto:thierry.saintmaxent@decathlon.com"><h4 class="text-center bg-light">thierry.saintmaxent@decathlon.com</h4></a>
-      <h4 class="text-center bg-light"> Decathlon Villeneuve d'ascq </h4>
+      <a href=/{{name}}><p class="text-center bg-light mt-5"> ENTER YOUR FEELING </p></a>
+      <a href=/><p class="text-center bg-light mb-5"> NEW USER </p></a>
+      <h1 class="text-center bg-light"> Feel free to contact for new challenges and advices: </h1>
+      <a href="mailto:thierry.saintmaxent@gmail.com"><h4 class="text-center bg-light">thierry.saintmaxent@gmail.com</h4></a>
       <h4 class="text-center bg-light"> Record 10km : 35'28" </h4>
       <h4 class="text-center bg-light"> Record semi marathon : 1h18'46" </h4>
       <h4 class="text-center bg-light"> Record marathon : 2h53'57" </h4>
       <h4 class="text-center bg-light"> UTMB Finisher </h4>
-      <h1 class="text-center bg-light"> or you can contact one of our store who can help you !!!!! </h1>
-      <a href=/{{name}}><p class="text-center bg-light"> ENTER YOUR FEELING </p></a>
-      <a href=/><p class="text-center bg-light"> NEW USER </p></a>
-
   </div>
-
 </div>
 
 <div class="row">
-
   <div class="col-lg-6 col-6">
   <h1 class="text-center bg-light"> YOUR 10 PAST FEELING : </h1>
 {% for element in stats %}
@@ -57,7 +50,6 @@
 {% endif %}
 {% endfor %}
 </div>
-
 <div class="col-lg-6 col-6">
 <h1 class="text-center bg-light"> SINCE THE BEGGINING OF THE YEAR : </h1>
 {% for element in yearstats %}
@@ -74,12 +66,8 @@
 {% endif %}
 {% endfor %}
 </div>
-
-
-
 </div>
 </div>
-
 <div class="container-fluid text-center text-white bg-primary jumbotron">
 </div>
 
