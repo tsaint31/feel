@@ -42,6 +42,7 @@ function login(result) {
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
+  console.log(process.env.DATABASE_URL);
   client.connect();
   client.query(
     "SELECT COUNT (DISTINCT name) from feeling",
